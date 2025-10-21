@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# Virtual environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Logs and output
+*.log
+*.out
+*.err
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Spark / Hadoop temporary files
+derby.log
+metastore_db/
+spark-warehouse/
+*.crc
+*.parquet.crc
+*.avro.crc
+*.orc.crc
+
+# Data folders
+data_raw/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Build and packaging
+build/
+dist/
+.eggs/
+MANIFEST
+
+# Coverage and test reports
+.coverage
+htmlcov/
+.cache/
+pytest_cache/
