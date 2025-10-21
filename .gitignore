@@ -35,6 +35,7 @@ spark-warehouse/
 
 # Data folders
 data_raw/
+_SUCCESS
 
 # IDE and editor files
 .vscode/
