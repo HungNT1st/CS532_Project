@@ -2,7 +2,6 @@
 #   python etl.py \
 #     --movies_csv data_raw/movies_metadata.csv \
 #     --credits_csv data_raw/credits.csv \
-#     --ratings_csv data_raw/ratings.csv \
 #     --out_dir data_parquet \
 #     --repartition 8 --shuffle_partitions 64
 #
@@ -10,7 +9,6 @@
 #   python etl.py \
 #     --movies_csv data_raw/movies_metadata.csv \
 #     --credits_csv data_raw/credits.csv \
-#     --ratings_csv data_raw/ratings.csv \
 #     --out_dir data_parquet_20k \
 #     --limit 20000
 
@@ -19,7 +17,6 @@ import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql import types as T
-
 
 # Create a SparkSession
 def build_spark(app_name: str, shuffle_partitions: int = 64):
@@ -80,6 +77,9 @@ def read_movies(spark, path: str, limit: int | None):
     df = df.withColumn("movieId", F.col("movieId").cast("long"))
     df = df.withColumn("vote_average", F.col("vote_average").cast("double"))
     df = df.withColumn("vote_count", F.col("vote_count").cast("long"))
+
+    # Filter out invalid ratings (<0 or >10)
+    df = df.filter((F.col("vote_average") >= 0.0) & (F.col("vote_average") <= 10.0))
 
     movies = df.select(
         "movieId", "title", "year", F.col("genres_names").alias("genres"),
