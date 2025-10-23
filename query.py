@@ -37,6 +37,7 @@ class Timer:
         dt = t1 - self.t0
         self.t0 = t1
         print(f"[TIMER] {label}: {dt:.3f}s")
+        return dt
 
 # Split comma-separated list and trim spaces for input names and genres
 def parse_list(s: str) -> List[str]:
